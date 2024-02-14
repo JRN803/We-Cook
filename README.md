@@ -1,10 +1,6 @@
 # Client
 
----
-
 # Server
-
----
 
 ## Structure
 
