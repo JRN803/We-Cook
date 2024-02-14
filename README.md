@@ -1,5 +1,7 @@
 # Client
 
+---
+
 # Server
 
 ## Structure
