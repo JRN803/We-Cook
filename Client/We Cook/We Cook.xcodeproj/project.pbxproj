@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		606361D52B9A8CE9005D2011 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606361D42B9A8CE9005D2011 /* Recipe.swift */; };
+		606361D72B9A90E4005D2011 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606361D62B9A90E4005D2011 /* RecipeDetailView.swift */; };
+		606361DB2B9A95C3005D2011 /* RecipeListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606361DA2B9A95C3005D2011 /* RecipeListItemView.swift */; };
+		608CD5A22B9C4B3F00B4F4F8 /* RecipeSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608CD5A12B9C4B3F00B4F4F8 /* RecipeSearchBar.swift */; };
+		608CD5A42B9C73D500B4F4F8 /* IngredientsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608CD5A32B9C73D500B4F4F8 /* IngredientsList.swift */; };
+		608CD5A62B9EE19F00B4F4F8 /* NewRecipeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608CD5A52B9EE19F00B4F4F8 /* NewRecipeSheet.swift */; };
 		60EDED3F2B99A63900EB1930 /* We_CookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EDED3E2B99A63900EB1930 /* We_CookApp.swift */; };
 		60EDED412B99A63900EB1930 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EDED402B99A63900EB1930 /* ContentView.swift */; };
 		60EDED432B99A63B00EB1930 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60EDED422B99A63B00EB1930 /* Assets.xcassets */; };
@@ -17,6 +23,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		606361D42B9A8CE9005D2011 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		606361D62B9A90E4005D2011 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
+		606361DA2B9A95C3005D2011 /* RecipeListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListItemView.swift; sourceTree = "<group>"; };
+		608CD5A12B9C4B3F00B4F4F8 /* RecipeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSearchBar.swift; sourceTree = "<group>"; };
+		608CD5A32B9C73D500B4F4F8 /* IngredientsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsList.swift; sourceTree = "<group>"; };
+		608CD5A52B9EE19F00B4F4F8 /* NewRecipeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecipeSheet.swift; sourceTree = "<group>"; };
 		60EDED3B2B99A63900EB1930 /* We Cook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "We Cook.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60EDED3E2B99A63900EB1930 /* We_CookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = We_CookApp.swift; sourceTree = "<group>"; };
 		60EDED402B99A63900EB1930 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,8 +74,14 @@
 				60EDED4C2B99A98300EB1930 /* RecipesHome.swift */,
 				60EDED4E2B99AAFC00EB1930 /* HeaderAndNavigation.swift */,
 				60EDED502B99ACB800EB1930 /* FilterTabs.swift */,
+				606361D42B9A8CE9005D2011 /* Recipe.swift */,
+				606361D62B9A90E4005D2011 /* RecipeDetailView.swift */,
+				606361DA2B9A95C3005D2011 /* RecipeListItemView.swift */,
+				608CD5A12B9C4B3F00B4F4F8 /* RecipeSearchBar.swift */,
+				608CD5A32B9C73D500B4F4F8 /* IngredientsList.swift */,
 				60EDED422B99A63B00EB1930 /* Assets.xcassets */,
 				60EDED442B99A63B00EB1930 /* Preview Content */,
+				608CD5A52B9EE19F00B4F4F8 /* NewRecipeSheet.swift */,
 			);
 			path = "We Cook";
 			sourceTree = "<group>";
@@ -146,9 +164,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				608CD5A42B9C73D500B4F4F8 /* IngredientsList.swift in Sources */,
+				608CD5A22B9C4B3F00B4F4F8 /* RecipeSearchBar.swift in Sources */,
+				606361D72B9A90E4005D2011 /* RecipeDetailView.swift in Sources */,
+				608CD5A62B9EE19F00B4F4F8 /* NewRecipeSheet.swift in Sources */,
+				606361DB2B9A95C3005D2011 /* RecipeListItemView.swift in Sources */,
 				60EDED4F2B99AAFC00EB1930 /* HeaderAndNavigation.swift in Sources */,
 				60EDED512B99ACB800EB1930 /* FilterTabs.swift in Sources */,
 				60EDED4D2B99A98300EB1930 /* RecipesHome.swift in Sources */,
+				606361D52B9A8CE9005D2011 /* Recipe.swift in Sources */,
 				60EDED412B99A63900EB1930 /* ContentView.swift in Sources */,
 				60EDED3F2B99A63900EB1930 /* We_CookApp.swift in Sources */,
 			);
@@ -289,6 +313,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -318,6 +343,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

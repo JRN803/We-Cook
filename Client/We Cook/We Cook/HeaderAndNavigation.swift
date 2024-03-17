@@ -25,6 +25,6 @@ struct HeaderAndNavigation: View {
 
 struct HeaderAndNavigation_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderAndNavigation().preferredColorScheme(.dark)
+        HeaderAndNavigation()
     }
 }

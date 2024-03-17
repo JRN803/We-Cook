@@ -1,0 +1,8 @@
+//
+//  NewRecipeViewModel.swift
+//  We Cook
+//
+//  Created by Jonathan Nguyen on 3/16/24.
+//
+
+import Foundation

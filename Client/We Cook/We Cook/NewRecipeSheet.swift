@@ -8,11 +8,30 @@
 import SwiftUI
 
 struct NewRecipeSheet: View {
+    @Binding var creatingNewRecipe: Bool
+    @State var recipeName:String = "New Recipe"
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            HStack{
+                TextField(recipeName,text:$recipeName)
+                    .font(.system(size: 35,weight: .bold))
+                Spacer()
+                Image(systemName:"x.circle.fill")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .foregroundStyle(Color("Primary"))
+                    .onTapGesture {
+                        creatingNewRecipe = false
+                    }
+            }
+            Spacer()
+        }
+        .interactiveDismissDisabled()
+        .padding(.horizontal,15)
+        .padding(.vertical,10)
     }
 }
 
-#Preview {
-    NewRecipeSheet()
-}
+//#Preview {
+//    NewRecipeSheet()
+//}

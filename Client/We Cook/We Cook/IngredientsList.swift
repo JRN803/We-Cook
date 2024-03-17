@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct IngredientsList: View {
+    var recipe:Recipe
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            ForEach(recipe.ingredients,id:\.self) {ingredient in
+                HStack {
+                    Image(systemName:"circle.fill")
+                        .resizable()
+                        .frame(width:8,height:8)
+                        .foregroundStyle(Color("Primary"))
+                    Text(ingredient)
+                }
+            }
+        }.listStyle(PlainListStyle())
     }
 }
 
-#Preview {
-    IngredientsList()
-}
+//#Preview {
+//    IngredientsList()
+//}
