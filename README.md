@@ -30,14 +30,49 @@ The server is built with Flask and a MySql database, structured as a MVC. The se
     "Message": "Login Successful",
     "cookie": cookie,
     "id": user.id,
-    "name": user.first_name+" "+user.last_name
+    "fName": user.first_name,
+    "lName": user.last_name
 }
 ```
 
 - _\[PUT,POST\] /api/user/logout_ requires an _id_ in the body. It then invalidates the cookie for that user stored in the database.
 
-- _\[PUT,POST\] /api/user/home_ requires a valid cookie and id in the body. It checks this against the one stored for that user in the database. If it is valid, access is granted and recipes for the user are sent over as a json object with key "Recipes" and value as an array of objects containing recipes along with status code 200.
+### @auth wrapped routes
 
-- _\[PUT,POST\] /api/user/home/newrecipe_ requires a valid cookie and id in the body. It checks this against the one stored for that user in the database. If it is valid, users can create a new recipe by supplying the following fields: _String name_, _Array of Objects ingredients_, _String meals_, _String uri_, _String intructions_. _uri_ and _instructions_ are optional. _ingredients_ should be array of objects with _String name_, _Int whole_, _Int numerator_, _Int denominator_, _String unit_. No fields are required but a default will be supplied. Success returns status code 200.
+Routes wrapped with auth require a valid cookie and id in the body. It checks this against the one stored for that user in the database. If the credentials are expired or invalid, the route exits with status code 401. If the cookie or id are not present, the route exits with status code 403.
 
+```
+{
+    "cookie": String,
+    "id": Int
+}
+```
+
+- _\[PUT,POST\] /api/user/home_ Recipes for the user are sent over as a json object with key "Recipes" and value as an array of objects containing recipes along with status code 200.
+
+```
+{
+    "Recipes": [Recipes]
+}
+```
+
+- _\[PUT,POST\] /api/user/home/newrecipe_ Users can create a new recipe by supplying the following fields: _String name_, _Array of Objects ingredients_, _String meals_, _String uri_, _String intructions_. _uri_ and _instructions_ are optional. _ingredients_ should be array of objects with _String name_, _Int whole_, _Int numerator_, _Int denominator_, _String unit_. No fields except name are required but a default will be supplied. Success returns status code 200.
+```
+example
+{
+    name: String,
+    meals: ["Breakfast","Lunch"].
+    uri: _optional string_,
+    instructions: _optional string_,
+    ingredients: [
+        {
+            "name": String,
+            "whole": _optional int_,
+            "numerator": _optional int_,
+            "denominator": _optional int_, 
+            "unit": _optional string_
+        }
+    ]
+}
+```
 - _\[PUT,POST\] /api/user/home/deleterecipe?id=id_ requires a valid cookie and id in the body. It checks this against the one stored for that user in the database. If it is valid, users can delete an existing recipe by supplying the id as a query param. Success returns status code 200.
