@@ -11,16 +11,23 @@ struct RecipeListItemView: View {
     var recipe: Recipe
     var body: some View {
         HStack(alignment:.center,spacing:20){
-            Image(recipe.image)
-                .resizable()
-                .frame(width:125,height: 125)
-                .aspectRatio(contentMode: .fit)
+            //Add caching here    
+            AsyncImage(url: URL(string: NetworkManager.recipeImageURL+recipe.image)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width:125,height: 125)
+            } placeholder: {
+                ProgressView()
+            }
             VStack(alignment: .leading,spacing:8) {
                 Text(recipe.name)
                     .font(.system(size: 20, weight: .semibold))
                     .bold()
+                    .foregroundStyle(.gray)
                 Text("Cook Time: \(recipe.time)")
                     .font(.system(size: 12, weight: .light))
+                    .foregroundStyle(.gray)
                 HStack{
                     
                     Image(systemName: "heart.fill")
@@ -30,6 +37,7 @@ struct RecipeListItemView: View {
                         .aspectRatio(contentMode:.fit)
                     Text("\(recipe.likes)")
                         .font(.system(size: 12, weight: .light))
+                        .foregroundStyle(.gray)
                 }
             }.padding(.vertical,10)
             Spacer()
@@ -40,8 +48,8 @@ struct RecipeListItemView: View {
     }
 }
 
-struct RecipeListItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecipeListItemView(recipe:MockRecipeData.sampleRecipe)
-    }
-}
+//struct RecipeListItemView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RecipeListItemView(recipe:MockRecipeData.sampleRecipe)
+//    }
+//}

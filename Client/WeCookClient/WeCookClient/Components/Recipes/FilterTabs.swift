@@ -8,11 +8,26 @@
 import SwiftUI
 
 struct FilterTabs: View {
+    @Binding var selectedFilter: RecipeFilters
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView(.horizontal){
+            HStack{
+                ForEach(RecipeFilters.allCases, id: \.rawValue) {filter in
+                    Text("\(filter)")
+                        .padding(.horizontal,12)
+                        .padding(.vertical, 2)
+                        .font(.system(size: 22, weight: .regular, design: .default))
+                        .background(filter == selectedFilter ? Color.secondaryWhite : .clear)
+                        .foregroundColor(filter == selectedFilter ? Color.primaryColor : .white)
+                        .cornerRadius(360)
+                        .padding(6)
+                        .onTapGesture {selectedFilter = filter}
+                }
+            }
+        }
     }
 }
-
-#Preview {
-    FilterTabs()
-}
+//
+//#Preview {
+//    FilterTabs()
+//}

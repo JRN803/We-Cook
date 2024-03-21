@@ -1,8 +1,31 @@
 //
 //  LoadingView.swift
-//  WeCookClient
+//  Appetizers
 //
-//  Created by Jonathan Nguyen on 3/17/24.
+//  Created by Jonathan Nguyen on 3/11/24.
 //
 
-import Foundation
+import SwiftUI
+
+struct ActivityIndicator: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIActivityIndicatorView {
+        let activityIndicatorView = UIActivityIndicatorView(style: .large)
+        activityIndicatorView.color = UIColor.primaryColor
+        activityIndicatorView.startAnimating()
+        return activityIndicatorView
+    }
+    
+    func updateUIView(_ uiView: UIActivityIndicatorView, context: Context) {}
+    
+}
+
+struct LoadingView: View {
+    var body: some View {
+        ZStack {
+            Color(.systemBackground)
+                .ignoresSafeArea()
+            
+            ActivityIndicator()
+        }
+    }
+}

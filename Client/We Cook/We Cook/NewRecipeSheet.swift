@@ -8,14 +8,22 @@
 import SwiftUI
 
 struct NewRecipeSheet: View {
+    
     @Binding var creatingNewRecipe: Bool
-    @State var recipeName:String = "New Recipe"
+    @StateObject var viewModel = NewRecipeViewModel()
+    let meals = ["Breakfast","Brunch","Lunch","Dinner"]
     var body: some View {
         ScrollView {
-            HStack{
-                TextField(recipeName,text:$recipeName)
-                    .font(.system(size: 35,weight: .bold))
-                Spacer()
+                    TextField("Recipe Name",text:$viewModel.name)
+                    TextField("Directions",text:$viewModel.directions)
+                    List(selection: $viewModel.meals) {
+                        ForEach(meals, id: \.self) { meal in
+                            Text(meal)
+                        }
+                    }
+//                TextField(recipeName,text:$recipeName)
+//                    .font(.system(size: 35,weight: .bold))
+//                Spacer()
                 Image(systemName:"x.circle.fill")
                     .resizable()
                     .frame(width: 20, height: 20)
@@ -23,7 +31,6 @@ struct NewRecipeSheet: View {
                     .onTapGesture {
                         creatingNewRecipe = false
                     }
-            }
             Spacer()
         }
         .interactiveDismissDisabled()
@@ -32,6 +39,6 @@ struct NewRecipeSheet: View {
     }
 }
 
-//#Preview {
-//    NewRecipeSheet()
-//}
+#Preview {
+    NewRecipeSheet(creatingNewRecipe: .constant(true))
+}

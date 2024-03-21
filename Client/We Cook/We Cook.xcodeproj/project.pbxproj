@@ -13,6 +13,9 @@
 		608CD5A22B9C4B3F00B4F4F8 /* RecipeSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608CD5A12B9C4B3F00B4F4F8 /* RecipeSearchBar.swift */; };
 		608CD5A42B9C73D500B4F4F8 /* IngredientsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608CD5A32B9C73D500B4F4F8 /* IngredientsList.swift */; };
 		608CD5A62B9EE19F00B4F4F8 /* NewRecipeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608CD5A52B9EE19F00B4F4F8 /* NewRecipeSheet.swift */; };
+		608CD61A2BA57F6B00B4F4F8 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608CD6192BA57F6B00B4F4F8 /* Sidebar.swift */; };
+		608CD61C2BA58D6100B4F4F8 /* RecipesHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608CD61B2BA58D6100B4F4F8 /* RecipesHomeViewModel.swift */; };
+		608CD61E2BA58FDE00B4F4F8 /* NewRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608CD61D2BA58FDE00B4F4F8 /* NewRecipeViewModel.swift */; };
 		60EDED3F2B99A63900EB1930 /* We_CookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EDED3E2B99A63900EB1930 /* We_CookApp.swift */; };
 		60EDED412B99A63900EB1930 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EDED402B99A63900EB1930 /* ContentView.swift */; };
 		60EDED432B99A63B00EB1930 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60EDED422B99A63B00EB1930 /* Assets.xcassets */; };
@@ -29,6 +32,9 @@
 		608CD5A12B9C4B3F00B4F4F8 /* RecipeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSearchBar.swift; sourceTree = "<group>"; };
 		608CD5A32B9C73D500B4F4F8 /* IngredientsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsList.swift; sourceTree = "<group>"; };
 		608CD5A52B9EE19F00B4F4F8 /* NewRecipeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecipeSheet.swift; sourceTree = "<group>"; };
+		608CD6192BA57F6B00B4F4F8 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
+		608CD61B2BA58D6100B4F4F8 /* RecipesHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesHomeViewModel.swift; sourceTree = "<group>"; };
+		608CD61D2BA58FDE00B4F4F8 /* NewRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecipeViewModel.swift; sourceTree = "<group>"; };
 		60EDED3B2B99A63900EB1930 /* We Cook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "We Cook.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60EDED3E2B99A63900EB1930 /* We_CookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = We_CookApp.swift; sourceTree = "<group>"; };
 		60EDED402B99A63900EB1930 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -82,6 +88,9 @@
 				60EDED422B99A63B00EB1930 /* Assets.xcassets */,
 				60EDED442B99A63B00EB1930 /* Preview Content */,
 				608CD5A52B9EE19F00B4F4F8 /* NewRecipeSheet.swift */,
+				608CD6192BA57F6B00B4F4F8 /* Sidebar.swift */,
+				608CD61B2BA58D6100B4F4F8 /* RecipesHomeViewModel.swift */,
+				608CD61D2BA58FDE00B4F4F8 /* NewRecipeViewModel.swift */,
 			);
 			path = "We Cook";
 			sourceTree = "<group>";
@@ -164,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				608CD61C2BA58D6100B4F4F8 /* RecipesHomeViewModel.swift in Sources */,
 				608CD5A42B9C73D500B4F4F8 /* IngredientsList.swift in Sources */,
 				608CD5A22B9C4B3F00B4F4F8 /* RecipeSearchBar.swift in Sources */,
 				606361D72B9A90E4005D2011 /* RecipeDetailView.swift in Sources */,
@@ -174,6 +184,8 @@
 				60EDED4D2B99A98300EB1930 /* RecipesHome.swift in Sources */,
 				606361D52B9A8CE9005D2011 /* Recipe.swift in Sources */,
 				60EDED412B99A63900EB1930 /* ContentView.swift in Sources */,
+				608CD61E2BA58FDE00B4F4F8 /* NewRecipeViewModel.swift in Sources */,
+				608CD61A2BA57F6B00B4F4F8 /* Sidebar.swift in Sources */,
 				60EDED3F2B99A63900EB1930 /* We_CookApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

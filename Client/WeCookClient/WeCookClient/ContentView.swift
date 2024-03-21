@@ -9,9 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var sidebarOpen = false
-    @State var selectedView: Views = .recipes
-
+    @ObservedObject var viewModel = AppViewModel.shared
+    
     var body: some View {
         
         ZStack {
@@ -20,7 +19,13 @@ struct ContentView: View {
                 .fill(Color.primaryColor)
                 .ignoresSafeArea()
             
-            switch selectedView {
+            switch viewModel.selectedView {
+                
+            case .register:
+                RegisterView()
+                
+            case .login:
+                LoginView()
                 
             case .recipes:
                 RecipesView()
@@ -31,15 +36,17 @@ struct ContentView: View {
             }
             
         }
-        .overlay(Sidebar(isOpen: $sidebarOpen,selectedView: $selectedView))
+        .overlay(Sidebar())
         .overlay(
             Image(systemName: "line.3.horizontal")
                 .resizable()
                 .foregroundStyle(.white)
                 .scaledToFit()
                 .frame(width: 30)
-                .padding()
-                .onTapGesture{sidebarOpen.toggle()},
+                .padding(.top, 26)
+                .padding(.horizontal, 20)
+                .onTapGesture{viewModel.sidebarOpen.toggle()}
+                .opacity(viewModel.hideNav ? 0 : 1),
             alignment: .topTrailing
         )
     }

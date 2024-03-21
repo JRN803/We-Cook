@@ -10,5 +10,6 @@ import Foundation
 enum AuthAlerts: Error {
     case noUserSaved, invalidData,
          unableToComplete, invalidURL,
-         emailRegistered, invalidCredentials
+         emailRegistered, invalidCredentials,
+         accountCreated, missingField, failedToSaveRecipe
 }

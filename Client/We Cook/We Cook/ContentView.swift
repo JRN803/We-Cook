@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var sidebarOpen = false
     var body: some View {
         NavigationStack{
             ZStack{
                 ContainerRelativeShape()
                 .fill(Color("Primary"))
                     .ignoresSafeArea()
-                RecipesHome()
+                RecipesHome(sidebarOpen: $sidebarOpen)
+                Sidebar(sidebarOpen: $sidebarOpen)
             }
             .navigationBarHidden(true)
         }

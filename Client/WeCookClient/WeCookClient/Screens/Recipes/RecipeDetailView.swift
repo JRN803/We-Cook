@@ -12,14 +12,22 @@ struct RecipeDetailView: View {
     var recipe:Recipe
     @State var activeTab: String = "Ingredients"
     @Environment(\.dismiss) private var dismiss
-
+    
+    var deleteRecipe: (Int) async throws -> Void
     var body: some View {
         GeometryReader { shape in
             VStack(alignment:.leading,spacing: 0) {
-                Image(recipe.image)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(height: shape.size.height*0.4)
+                AsyncImage(url: URL(string: NetworkManager.recipeImageURL+recipe.image)) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: shape.size.height*0.4)
+                } placeholder: {
+                    Image("defaultRecipe")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: shape.size.height*0.4)
+                }
                 ZStack {
                     Rectangle()
                         .fill(.white)
@@ -30,12 +38,21 @@ struct RecipeDetailView: View {
                         HStack{
                             Text("\(recipe.name)")
                                 .font(.system(size: 35,weight: .bold))
+                                .foregroundStyle(.black)
                             Spacer()
                         }
                         .padding(.horizontal, 25)
                         .padding(.bottom,1)
                         HStack{
                             Text("Estimated Cook Time: \(recipe.time)")
+                                .font(.system(size: 18,weight: .light))
+                                .foregroundStyle(.gray)
+                            Spacer()
+                        }                        
+                        .padding(.horizontal, 25)
+
+                        HStack{
+                            Link("Reference Link", destination: URL(string: recipe.uri)!)
                                 .font(.system(size: 18,weight: .light))
                             Spacer()
                         }
@@ -56,7 +73,8 @@ struct RecipeDetailView: View {
                         case "Directions":
                             ScrollView{
                                 HStack{
-                                    Text(recipe.directions).lineSpacing(10.0)
+                                    Text(recipe.instructions).lineSpacing(10.0)
+                                        .foregroundStyle(.black)
                                     Spacer()
                                 }
                                 .padding(.horizontal,25)
@@ -64,7 +82,17 @@ struct RecipeDetailView: View {
                                 .padding(.bottom,50)
                             }
                         default:
-                            Text("Implement Later")
+
+                            Text("Delete this")
+                                .foregroundStyle(.black)
+                                .onTapGesture {
+                                    Task {
+                                        do {
+                                            try await deleteRecipe(recipe.id)
+                                            dismiss()
+                                        } catch { print("error in recipe detail view delete: \(error)")}
+                                    }
+                                }
                         }
                         
                         Spacer()
@@ -72,6 +100,8 @@ struct RecipeDetailView: View {
                 }
             }
         }
+        .onAppear{AppViewModel.shared.hideNav = true}
+        .onDisappear{AppViewModel.shared.hideNav = false}
         .ignoresSafeArea()
         .navigationBarBackButtonHidden()
         .toolbar{
@@ -101,6 +131,8 @@ struct RecipeDetailSectionTab:View {
             .onTapGesture {
                 activeTab = name
             }
+            .foregroundStyle(.black)
+
     }
 }
 
@@ -116,13 +148,16 @@ struct IngredientsList: View {
                         .frame(width:8,height:8)
                         .foregroundStyle(Color.primaryColor)
                     Text(ingredient)
+                        .foregroundStyle(.black)
                 }
             }
-        }.listStyle(PlainListStyle())
+            .listRowBackground(Color.white)
+        }
+        .listStyle(PlainListStyle())
     }
 }
 
-
-#Preview {
-    RecipeDetailView(recipe: MockRecipeData.sampleRecipe)
-}
+//
+//#Preview {
+//    RecipeDetailView(recipe: MockRecipeData.sampleRecipe)
+//}

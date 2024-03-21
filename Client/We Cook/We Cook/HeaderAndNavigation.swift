@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct HeaderAndNavigation: View {
+    @Binding var sidebarOpen: Bool
+    var title: String
     var body: some View {
         HStack {
-            Text("Recipes")
+            Text(title)
                 .foregroundColor(Color("Secondary"))
                 .font(.system(size: 52, weight: .bold, design: .default))
             Spacer()
             Button {
-                
+                sidebarOpen = true
             } label: {
                 Image("Hamburger")
             }
@@ -25,6 +27,6 @@ struct HeaderAndNavigation: View {
 
 struct HeaderAndNavigation_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderAndNavigation()
+        HeaderAndNavigation(sidebarOpen: .constant(false),title:"Recipes")
     }
 }

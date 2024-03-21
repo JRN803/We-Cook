@@ -9,7 +9,19 @@ import SwiftUI
 
 struct EmptyRecipes: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Image(systemName: "book.pages.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 50)
+                .foregroundStyle(Color.secondaryWhite)
+                .padding()
+            
+            Text("No Recipes to Show")
+                .font(.title2)
+                .fontWeight(.semibold)
+                .foregroundStyle(.white)
+        }.padding()
     }
 }
 

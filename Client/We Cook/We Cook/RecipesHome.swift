@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct RecipesHome: View {
-    @State var selectedFilter: String = "All"
-    @State var searchText: String = ""
-    @State var creatingNewRecipe: Bool = false
+    
+    @StateObject var viewModel = RecipesHomeViewModel()
+    
+    @Binding var sidebarOpen: Bool
+    
     var body: some View {
         VStack{
-            HeaderAndNavigation()
-            FilterTabs(selectedFilter: $selectedFilter)
-            RecipeSearchBar(searchText:$searchText,creatingNewRecipe: $creatingNewRecipe)
+            HeaderAndNavigation(sidebarOpen: $sidebarOpen, title: "Recipes")
+            FilterTabs(selectedFilter: $viewModel.selectedFilter)
+            RecipeSearchBar(searchText:$viewModel.searchText,creatingNewRecipe: $viewModel.creatingNewRecipe)
             List {
                 
                 ForEach(MockRecipeData.recipes) { recipe in
@@ -34,13 +36,13 @@ struct RecipesHome: View {
                 }
                 
             }
-            .navigationTitle("Recipes")
             .listStyle(PlainListStyle())
             Spacer()
         }
+        .navigationTitle("Recipes")
         .padding(.horizontal, 8)
-        .sheet(isPresented: $creatingNewRecipe, content: {
-            NewRecipeSheet(creatingNewRecipe: $creatingNewRecipe)
+        .sheet(isPresented: $viewModel.creatingNewRecipe, content: {
+            NewRecipeSheet(creatingNewRecipe: $viewModel.creatingNewRecipe)
                 .presentationDetents([.fraction(0.75)])
         })
     }
@@ -48,7 +50,7 @@ struct RecipesHome: View {
 
 struct RecipesHome_Previews: PreviewProvider {
     static var previews: some View {
-        RecipesHome()
+        RecipesHome(sidebarOpen: .constant(false))
             .preferredColorScheme(.dark)
     }
 }

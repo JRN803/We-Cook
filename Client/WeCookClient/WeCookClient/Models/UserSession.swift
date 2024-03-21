@@ -14,4 +14,7 @@ struct UserSession: Codable {
     var id: Int
     var fName: String
     var lName: String
+    var bio: String
+    var email: String
+    var pfp: String
 }

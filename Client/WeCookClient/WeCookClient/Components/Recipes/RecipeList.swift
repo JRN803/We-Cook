@@ -8,11 +8,37 @@
 import SwiftUI
 
 struct RecipeList: View {
+    var data: [Recipe]
+    var deleteRecipe: (Int) async throws -> Void
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        if data.isEmpty {
+            EmptyRecipes()
+        }
+        
+        List {
+            
+            ForEach(data) { recipe in
+                
+                ZStack{
+                    NavigationLink(destination: RecipeDetailView(recipe: recipe,deleteRecipe: deleteRecipe)) {
+                    }
+                    .opacity(0)
+                    RecipeListItemView(recipe: recipe)
+                }
+                .listRowInsets(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
+                .listRowBackground(Color(.clear))
+                .listRowSeparator(.hidden)
+                
+                
+            }
+            
+        }
+        .listStyle(PlainListStyle())
     }
+    
 }
 
-#Preview {
-    RecipeList()
-}
+//#Preview {
+//    RecipeList()
+//}

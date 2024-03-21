@@ -6,3 +6,5 @@
 //
 
 import Foundation
+
+enum RecipeFilters: String, CaseIterable,Codable { case All, Breakfast, Brunch, Lunch, Dinner }

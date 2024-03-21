@@ -56,7 +56,7 @@ Routes wrapped with auth require a valid cookie and id in the body. It checks th
 }
 ```
 
-- _\[PUT,POST\] /api/user/home/newrecipe_ Users can create a new recipe by supplying the following fields: _String name_, _Array of Objects ingredients_, _String meals_, _String uri_, _String intructions_. _uri_ and _instructions_ are optional. _ingredients_ should be array of objects with _String name_, _Int whole_, _Int numerator_, _Int denominator_, _String unit_. No fields except name are required but a default will be supplied. Success returns status code 200.
+- _\[PUT,POST\] /api/user/home/newrecipe_ Users can create a new recipe by supplying the following fields: _String name_, _Array of Objects ingredients_, _String meals_, _String uri_, _String intructions_. _uri_ and _instructions_ are optional. _ingredients_ should be array of objects with _String name_, _Int whole_, _Int numerator_, _Int denominator_, _String unit_. No fields except name are required but a default will be supplied. Success returns status code 200 and the new recipe's id.
 ```
 example
 {
