@@ -7,7 +7,6 @@ from WeCook.utils import *
 def auth(f):
     def wrapper(*args, **kwargs):
         body = request.json
-
         try:
             cookie = body["cookie"]
             id = body["id"]

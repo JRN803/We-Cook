@@ -1,11 +1,14 @@
+from datetime import date
+import json
+import os
+import random
 from WeCook.middleware import *
-from tokenize import Token
-from flask import request, jsonify
+from flask import request, jsonify, send_file
 import sqlalchemy
 from WeCook.models import *
 from WeCook import db
 from WeCook.utils import *
-
+import base64
 # =========== Index Controller ===========
 
 
@@ -14,7 +17,7 @@ class Index:
         return jsonify({"Message": "In Home Route"}), 200
 # ========================================
 
-# =========== User Controller ===========
+# =========== User Controller ============
 
 
 class UserController:
@@ -24,13 +27,20 @@ class UserController:
         body = request.json
 
         if "cookie" in body and "id" in body:
-            token = Token.query.filter_by(uid=body["id"]).first()
+            token = Tokens.query.filter_by(uid=body["id"]).first()
+            cookie = body["cookie"]
             if (token and
                 match_hash(token.hashedToken, cookie) and
                     token.expDate < datetime.datetime.now()):
                 # cookie expires after 7 days of no login
                 cookie = reissue_token(user.id, 7)
-                return jsonify({"Message": "Login Successful", "cookie": cookie, "id": body["id"]}), 200
+                return jsonify({"Message": "Login Successful",
+                            "cookie": cookie, "id": user.id,
+                            "fName": user.first_name,
+                            "lName": user.last_name,
+                            "email": user.email,
+                            "pfp": user.pfp,
+                            "bio": user.bio}), 200
 
             else:
                 invalidate_token(token)
@@ -54,7 +64,13 @@ class UserController:
             else:
                 # cookie expires after 1 day
                 cookie = reissue_token(user.id, 1)
-            return jsonify({"Message": "Login Successful", "cookie": cookie, "id": user.id, "fName": user.first_name, "lName": user.last_name}), 200
+            return jsonify({"Message": "Login Successful",
+                            "cookie": cookie, "id": user.id,
+                            "fName": user.first_name,
+                            "lName": user.last_name,
+                            "email": user.email,
+                            "pfp": user.pfp,
+                            "bio": user.bio}), 200
 
         return jsonify({"Message": "Invalid Login"}), 403
 
@@ -96,6 +112,26 @@ class UserController:
         except sqlalchemy.exc.IntegrityError:
             return jsonify({"Message": "Email is taken"}), 400
         # ======================================
+    
+    @auth
+    def editUser(user):
+        try:
+            body = request.json
+            user.first_name = body["fName"]
+            user.last_name = body["lName"]
+            user.email = body["email"]
+            user.bio = body["bio"]
+            db.session.commit()
+            return jsonify({"Message": "Login Successful",
+                            "cookie": body["cookie"], "id": user.id,
+                            "fName": user.first_name,
+                            "lName": user.last_name,
+                            "email": user.email,
+                            "pfp": user.pfp,
+                            "bio": user.bio}), 200
+        except Exception as e:
+            print("Error line 120",e)
+            return jsonify({"Message": "User could not be updated"}), 400
 
     @auth
     def home(user):
@@ -104,26 +140,15 @@ class UserController:
         for r in user.recipes:
 
             ingredients = []
-            # from linker between ingredients and recipes
             ingredientLinks = r.ingredientLinks
-
             for link in ingredientLinks:
-
-                details = link.details  # from linker between ingredient names and measurements
-                ingredientNameId = details.ingredientNameId
-                measurementId = details.measurementId
-
-                ingredient = IngredientNames.query.filter_by(
-                    id=ingredientNameId).first()
-                measurement = Measurements.query.filter_by(
-                    id=measurementId).first()
-
-                ingredients.append(format_ingredient(measurement, ingredient))
+                ingredients.append(Ingredients.query.filter_by(
+                    id=link.ingredientId).first().name)
 
             meals = []
             mealLinks = r.meals
             for m in mealLinks:
-                meals.append(Meals.query.filter_by(id=m.mealId).first())
+                meals.append(Meals.query.filter_by(id=m.mealId).first().name)
 
             recipes.append(format_recipe(r, ingredients, meals))
         return jsonify({"Recipes": recipes}), 200
@@ -138,14 +163,17 @@ class UserController:
             # array of objects with name, whole, numerator, denominator, unit
             ingredients = body["ingredients"]
             meals = body["meals"]
-            uri = body["uri"] if "uri" in body else None
+            uri = body["uri"] if ("uri" in body and body["uri"]) else None
             instructions = body["instructions"] if "instructions" in body else None
+            time = body["time"] if ("time" in body and body["time"]) else None
+
         except KeyError:
             return jsonify({"Message": "Missing Fields"}), 400
 
         # Create new recipe entry
         recipe = Recipes(name=name, ownerId=user.id,
-                         instructions=instructions, uri=uri)
+                         instructions=instructions, uri=uri,
+                         time=time)
         db.session.add(recipe)
         db.session.commit()
         db.session.refresh(recipe)
@@ -161,24 +189,14 @@ class UserController:
                 return jsonify({"Message": "An Error Occured"}), 500
 
         for ingredient in ingredients:
-            name = ingredient["name"]
-            whole = ingredient["whole"] if "whole" in ingredient else None
-            numerator = ingredient["numerator"] if "numerator" in ingredient else None
-            denominator = ingredient["denominator"] if "denominator" in ingredient else None
-            unit = ingredient["unit"] if "unit" in ingredient else None
-
-            ingredientName = add_to_db(IngredientNames, {"name": name})
-            measurement = add_to_db(Measurements, {
-                                    "whole": whole, "numerator": numerator, "denominator": denominator, "unit": unit})
-            ingredient = add_to_db(Ingredients, {
-                                   "measurementId": measurement.id, "ingredientNameId": ingredientName.id})
+            ingredient = add_to_db(Ingredients, {"name": ingredient})
 
             newRecipeIngredients = RecipesIngredients(
                 recipeId=recipe.id, ingredientId=ingredient.id)
             db.session.add(newRecipeIngredients)
-            db.session.commit()
+        db.session.commit()
 
-        return jsonify({"Message": "Success"}), 201
+        return {"id": recipe.id}, 201
 
     @auth
     def delete_recipe(user):
@@ -195,3 +213,61 @@ class UserController:
             return jsonify({"Message": "No Recipe Found"}), 404
 
 # ========================================
+
+# =========== Images Controller ===========
+
+
+class ImageController:
+
+    def getUserImage():
+        try:
+            id = request.args.get("id")
+            user = Users.query.filter_by(id=id).first()
+            imageName = user.pfp
+            return send_file(f"../Images/{imageName}"), 200
+        except Exception as e:
+            print(e)
+            return send_file("../Images/defaultUser.png"), 404
+
+    @auth
+    def setUserImage(user):
+
+        try:
+            body = request.json
+            base64Data = str.encode(body["imageData"])
+            imageName = f"{date.today()}{user.id}.png"
+            with open(os.path.join("Images", imageName), "wb") as newImage:
+                newImage.write(base64.decodebytes(base64Data))
+            user.pfp = imageName
+            db.session.commit()
+            return jsonify({"Message": "Success"}), 201
+        except Exception as e:
+            print(e)
+            return jsonify({"Message": "Failed"}), 400
+
+    def getRecipeImage():
+        try:
+            name = request.args.get("name")
+            return send_file(f"../Images/{name}"), 200
+        except:
+            return send_file("../Images/defaultRecipe.jpeg"), 404
+
+    @auth
+    def setRecipeImage(user):
+        body = request.json
+        try:
+            recipeId = body["recipeId"]
+            base64Data = str.encode(body["imageData"])
+            recipe = Recipes.query.filter_by(
+                id=recipeId, ownerId=user.id).first()
+            imageName = f"{recipeId}{date.today()}{user.id}.png"
+            with open(os.path.join("Images", imageName), "wb") as newImage:
+                newImage.write(base64.decodebytes(base64Data))
+            recipe.image = imageName
+            db.session.commit()
+            return jsonify({"Message": "Success"}), 201
+        except Exception as e:
+            print(e)
+            return jsonify({"Message": "Failed"}), 400
+
+# =========================================
