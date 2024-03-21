@@ -27,7 +27,7 @@ Create a Recipe|Filter Recipes
 - MySql
 
 ### Running the Server
-The server can be run via a Docker container. Simply build the Docker image using `docker build --tag wecook-server .' When in the _Server_ directory. This should create an available Docker image that should be run using the following command: `docker run -p 8080:8080 wecook-server`. Note this image does not use Docker Volumes so data will not persist between containers.
+The server can be run via a Docker container. Simply build the Docker image using `docker build --tag wecook-server .` When in the _Server_ directory. This should create an available Docker image that should be run using the following command: `docker run -p 8080:8080 wecook-server`. Note this image does not use Docker Volumes so data will not persist between containers.
 
 ### Running the Client
 To run the client, open Client/WeCookClient in XCode. Choose a simulator of your choice or connect a device to run the application on. In the NetworkManager file, change line 15 to match the respective local IP address of the machine running the server. The application should now be running. It is important to note the application will only be available to devices on the local network.
