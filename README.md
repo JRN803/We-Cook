@@ -2,21 +2,20 @@
 
 ## Project Demo
 
-### Creating an Account and Logging In
+### Account Information
 
-https://github.com/JRN803/WeCook/assets/159984068/0746b620-dcf2-4708-a2bc-0811a4aeb3f5
+Users can create an account, sign in, and edit their profile information.
 
-### Making Edits to Account
+A|B
+--|--
+![auth](https://github.com/JRN803/WeCook/assets/159984068/a0b1a0ff-c9d9-4dcc-923a-d930801c62ce)|![profile](https://github.com/JRN803/WeCook/assets/159984068/32592ffa-e4c3-46af-b8c4-10f2212b8fbb)
 
-https://github.com/JRN803/WeCook/assets/159984068/6e19c8a5-3329-4f56-81e9-421ce506fdfd
+### Recipe Information
+Create new recipes and filter through existing ones.
 
-### Creating a New Recipe
-
-https://github.com/JRN803/WeCook/assets/159984068/3c318122-3f4f-4ab8-b904-b435cc34d7f9
-
-### Filtering Recipes
-
-https://github.com/JRN803/WeCook/assets/159984068/4640cea0-fa86-4925-83a7-a72a75c9542b
+A|B
+--|--
+![createRecipe](https://github.com/JRN803/WeCook/assets/159984068/f9876bda-a24b-453d-9ef0-2179887e7a1a)|![filter](https://github.com/JRN803/WeCook/assets/159984068/1b546776-655f-4b1c-b75e-78234888d5eb)
 
 ---
 
