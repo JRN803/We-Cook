@@ -1,4 +1,4 @@
-*Updated 2025-02-06*
+*Updated 06-02-2025*
 # We Cook
 
 IOS application for managing recipes. Future developments include friends and sharing recipes.
